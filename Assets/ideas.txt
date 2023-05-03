@@ -1,0 +1,17 @@
+TODO:
+    - Menu controller support
+
+
+Challenge Mode
+    - Lots of starting upgrades, time limit for points
+
+General
+    - Replace picked up items
+
+Architecture
+    - Theme system for art
+    - Menu
+
+UI Polish
+    - Fix menu screens
+    - Multi-page instructions
