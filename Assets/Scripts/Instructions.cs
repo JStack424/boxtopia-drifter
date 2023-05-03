@@ -12,15 +12,4 @@ public class Instructions : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
-
-    // For button press
-    private void OnExtra()
-    {
-        GoBack();
-    }
-    private void OnStart()
-    {
-        StartGame();
-    }
-
 }
