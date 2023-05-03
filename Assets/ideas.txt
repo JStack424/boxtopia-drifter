@@ -1,5 +1,7 @@
 TODO:
     - Menu controller support
+    - Max turn based on how much stick movement
+    - Generic Scene Transition ManagerSS
 
 
 Challenge Mode

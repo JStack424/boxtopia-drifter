@@ -13,13 +13,4 @@ public class Title : MonoBehaviour
         SceneManager.LoadScene("Instructions");
     }
 
-    private void OnExtra()
-    {
-        ViewInstructions();
-    }
-    private void OnStart()
-    {
-        StartGame();
-    }
-
 }
