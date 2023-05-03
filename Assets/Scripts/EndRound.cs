@@ -32,16 +32,6 @@ public class EndRound : MonoBehaviour
         field.text = val.ToString();
     }
 
-    // Handles controller button input 'Start' event
-    private void OnStart()
-    {
-        OnPlayAgain();
-    }
-    private void OnExtra()
-    {
-        OnUpgrade();
-    }
-
     public void OnPlayAgain()
     {
         SceneManager.LoadScene("GameScene");

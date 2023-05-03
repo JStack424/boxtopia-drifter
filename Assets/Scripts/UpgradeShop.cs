@@ -11,12 +11,6 @@ public class UpgradeShop : MonoBehaviour
         availablePoints.text = GameManager.Instance.totalScore.ToString();
     }
 
-    // For controller button handling
-    private void OnStart()
-    {
-        OnNextLevel();
-    }
-
     public void OnNextLevel()
     {
         SceneManager.LoadScene("GameScene");
