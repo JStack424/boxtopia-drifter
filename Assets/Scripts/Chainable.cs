@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public struct Options
 {
@@ -13,6 +15,7 @@ public struct Options
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(LineRenderer))]
 public class Chainable : MonoBehaviour
 {
     [SerializeField] public Transform anchorFront;
@@ -24,34 +27,14 @@ public class Chainable : MonoBehaviour
     [CanBeNull] private SpringJoint2D _springJoint;
     private int _score;
 
-    [SerializeField]
-    private Chainable _attachedObj;
+    [CanBeNull] private Chainable _parentObj;
 
-    [CanBeNull]
-    public Chainable AttachedObj
-    {
-        get => _attachedObj;
-        set
-        {
-            if (value)
-            {
-                _lineRenderer = gameObject.AddComponent<LineRenderer>();
-                _lineRenderer.startColor = Color.yellow;
-                _lineRenderer.endColor = Color.yellow;
-                _lineRenderer.widthMultiplier = 0.1f;
-                _lineRenderer.positionCount = 2;
-            }
-            else
-            {
-                Destroy(_lineRenderer);
-            }
-            _attachedObj = value;
-
-        }
-    }
+    [CanBeNull] public Chainable AttachedObj;
 
     private void Start()
     {
+        _lineRenderer = gameObject.GetComponent<LineRenderer>();
+
         if (!TryGetComponent(out _springJoint))
             return;
         var opt = Utils.GetOptions(transform.position.magnitude);
@@ -67,15 +50,18 @@ public class Chainable : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (AttachedObj != null)
-        {
-            _lineRenderer.SetPositions(new Vector3[] {anchorRear.position, AttachedObj.anchorFront.position});
-        }
+        if (_parentObj == null)
+            return;
+
 
         if (_springJoint != null)
         {
-            // Color based on force applied
-            spriteRenderer.color = Color.Lerp(Color.white, Color.red,  _springJoint.reactionForce.magnitude / _springJoint.breakForce);
+            _lineRenderer.SetPositions(new Vector3[] {_parentObj.anchorRear.position, anchorFront.position});
+            var dmgColor = Color.Lerp(Color.white, Color.red,
+                _springJoint.reactionForce.magnitude / _springJoint.breakForce);
+            _lineRenderer.startColor = dmgColor;
+            _lineRenderer.endColor = dmgColor;
+            spriteRenderer.color = dmgColor;
         }
     }
 
@@ -94,25 +80,28 @@ public class Chainable : MonoBehaviour
         {
             attachTo = attachTo.AttachedObj;
         }
+        _parentObj = attachTo;
+        _lineRenderer.positionCount = 2;
 
-        var destRot = attachTo.transform.rotation;
+        _parentObj.AttachedObj = this;
+
+        var destRot = _parentObj.transform.rotation;
         transform.rotation = destRot;
-        transform.position = attachTo.transform.position + destRot * attachTo.anchorRear.localPosition +
+        transform.position = _parentObj.transform.position + destRot * _parentObj.anchorRear.localPosition +
                              (transform.position - anchorFront.transform.position);
-        GetComponent<Rigidbody2D>().velocity = attachTo.GetComponent<Rigidbody2D>().velocity;
+        GetComponent<Rigidbody2D>().velocity = _parentObj.GetComponent<Rigidbody2D>().velocity;
 
         var myCollider = GetComponent<BoxCollider2D>();
         myCollider.isTrigger = false;
-        attachTo.AttachedObj = this;
 
         if (_springJoint != null)
         {
             _springJoint.enabled = true;
-            _springJoint.connectedBody = attachTo.GetComponent<Rigidbody2D>();
-            _springJoint.connectedAnchor = attachTo.anchorRear.localPosition;
+            _springJoint.connectedBody = _parentObj.GetComponent<Rigidbody2D>();
+            _springJoint.connectedAnchor = _parentObj.anchorRear.localPosition;
             _springJoint.anchor = anchorFront.localPosition;
 
-            attachTo.TryGetComponent<SpringJoint2D>(out var parentSpringJoint);
+            _parentObj.TryGetComponent<SpringJoint2D>(out var parentSpringJoint);
             float bf;
             if (parentSpringJoint == null)
             {
@@ -129,10 +118,9 @@ public class Chainable : MonoBehaviour
     private async void OnJointBreak2D(Joint2D brokenJoint)
     {
         // Inform parent about breakage
-        if (_springJoint != null)
+        if (_parentObj != null)
         {
-            var parentChainable = _springJoint.connectedBody.gameObject.GetComponent<Chainable>();
-            parentChainable.AttachedObj = null;
+            _parentObj.AttachedObj = null;
         }
         RoundManager.Instance.OnBoxBroken();
 

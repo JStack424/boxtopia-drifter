@@ -1,7 +1,7 @@
 TODO:
     - Max turn based on how much stick movement
     - Generic Scene Transition Manager
-    - LineRenderer not appearing
+    - Remove Chainable from Player, instead use interface for rear anchor
 
 
 Challenge Mode
