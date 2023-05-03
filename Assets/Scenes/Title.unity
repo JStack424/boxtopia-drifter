@@ -323,33 +323,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1017271136}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnNavigateScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NavButton, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+    - target: {fileID: 7011231475907273208, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
+      propertyPath: sceneName
+      value: Instructions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
@@ -358,24 +334,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2786485024692267545, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
   m_PrefabInstance: {fileID: 1017271133}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1017271135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2786485024692267544, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-  m_PrefabInstance: {fileID: 1017271133}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1017271136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017271135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8455a2c331bb4a79b9c2d3acbafb9a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Instructions
 --- !u!1 &1225963298 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2786485024692267544, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
@@ -386,19 +344,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2786485024692267545, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
   m_PrefabInstance: {fileID: 2786485023768370490}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1225963304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225963298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8455a2c331bb4a79b9c2d3acbafb9a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: GameScene
 --- !u!1 &1331354860
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,33 +832,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1225963304}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnNavigateScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NavButton, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2786485024692267551, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+    - target: {fileID: 7011231475907273208, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}
+      propertyPath: sceneName
+      value: GameScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b331e8ee2824ca848a90e4c97bf57754, type: 3}

@@ -1,21 +1,32 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeRow : MonoBehaviour
 {
     public Utils.UpgradeKey upgradeKey;
     public TMP_Text levelText;
     public TMP_Text costText;
+    public Selectable purchaseButton;
 
     private int CurrentLevel => GameManager.Instance.GetUpgradeValue(upgradeKey);
     private int Cost => CurrentLevel * 3;
 
-    void Start()
+    private void Start()
     {
         UpdateRow();
     }
 
-    void UpdateRow()
+    private void Update()
+    {
+        if (purchaseButton.enabled && Cost > GameManager.Instance.totalScore)
+        {
+            purchaseButton.interactable = false;
+        }
+    }
+
+    private void UpdateRow()
     {
         levelText.text = CurrentLevel.ToString();
         costText.text = Cost.ToString();

@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EndRound : MonoBehaviour
 {
@@ -31,15 +30,4 @@ public class EndRound : MonoBehaviour
     {
         field.text = val.ToString();
     }
-
-    public void OnPlayAgain()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
-
-    public void OnUpgrade()
-    {
-        SceneManager.LoadScene("UpgradeScene");
-    }
-
 }

@@ -1,9 +1,7 @@
 TODO:
     - Max turn based on how much stick movement
-    - Generic Scene Transition Manager
     - Remove Chainable from Player, instead use interface for rear anchor
     - Adjust colliders to drive behind trees/rocks
-    - Select on hover
 
 
 Challenge Mode
