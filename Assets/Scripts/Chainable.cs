@@ -28,6 +28,7 @@ public class Chainable : MonoBehaviour
 
     [CanBeNull] private Chainable _parentObj;
     private bool _isAttached;
+    private float _explosionDelay = 0.2f;
 
     [CanBeNull] public Chainable AttachedObj;
 
@@ -67,18 +68,14 @@ public class Chainable : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckLink();
-    }
-
-    private async void CheckLink()
-    {
         var joints = GetComponents<Joint2D>();
         if (_isAttached && (_parentObj.IsDestroyed() || joints.Length == 0))
         {
-            _isAttached = false;
             _lineRenderer.positionCount = 0;
+            _explosionDelay -= Time.fixedDeltaTime;
+            if (_explosionDelay > 0)
+                return;
             RoundManager.Instance.OnBoxBroken();
-            await Task.Delay(200);
             Instantiate(explosionEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }

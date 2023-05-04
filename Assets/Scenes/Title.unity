@@ -484,7 +484,7 @@ MonoBehaviour:
   m_MoveAction: {fileID: 2241256525178849106, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
   m_SubmitAction: {fileID: 7210649300242316356, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
   m_CancelAction: {fileID: 8202810617343518389, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
-  m_LeftClickAction: {fileID: 7210649300242316356, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
+  m_LeftClickAction: {fileID: -6014820802967465754, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
   m_MiddleClickAction: {fileID: -8746856611162369593, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
   m_RightClickAction: {fileID: 4572075127622854957, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
   m_ScrollWheelAction: {fileID: 8418102894804449420, guid: 5cf7e94f37cfd2d4e92487f6280fd287, type: 3}
