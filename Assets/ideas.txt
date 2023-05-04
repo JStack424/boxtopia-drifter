@@ -2,6 +2,7 @@ TODO:
     - Max turn based on how much stick movement
     - Remove Chainable from Player, instead use interface for rear anchor
     - Adjust colliders to drive behind trees/rocks
+    - 2 trails for drift
 
 
 Challenge Mode

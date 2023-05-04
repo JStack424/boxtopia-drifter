@@ -137,20 +137,21 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        var chainable = GetComponent<Chainable>();
         var trailLength = GetTrailLength();
+
         if (other.CompareTag("Pickup"))
         {
             if (trailLength < _maxTrailLength)
             {
-                other.gameObject.SendMessage("OnAttach", gameObject);
+                other.GetComponent<Chainable>().OnAttach(chainable);
             }
         } else if (other.CompareTag("DropZone"))
         {
-            var chainable = GetComponent<Chainable>();
             if (chainable.AttachedObj != null)
             {
                 RoundManager.Instance.AddScore(trailLength-1);
-                chainable.AttachedObj.SendMessage("OnScore");
+                chainable.AttachedObj.OnScore();
                 chainable.AttachedObj = null;
             }
         }

@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public struct Options
 {
@@ -28,6 +27,7 @@ public class Chainable : MonoBehaviour
     private int _score;
 
     [CanBeNull] private Chainable _parentObj;
+    private bool _isAttached;
 
     [CanBeNull] public Chainable AttachedObj;
 
@@ -65,21 +65,43 @@ public class Chainable : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        CheckLink();
+    }
+
+    private async void CheckLink()
+    {
+        var joints = GetComponents<Joint2D>();
+        if (_isAttached && (_parentObj.IsDestroyed() || joints.Length == 0))
+        {
+            _isAttached = false;
+            _lineRenderer.positionCount = 0;
+            RoundManager.Instance.OnBoxBroken();
+            await Task.Delay(200);
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
     public void OnScore()
     {
         RoundManager.Instance.AddScore(_score);
         RoundManager.Instance.OnBoxSaved();
-        AttachedObj?.SendMessage("OnScore");
+        if (AttachedObj != null)
+            AttachedObj.OnScore();
         Destroy(gameObject);
     }
 
-    public void OnAttach(GameObject source)
+    public void OnAttach(Chainable source)
     {
-        var attachTo = source.GetComponent<Chainable>();
+        var attachTo = source;
         while (attachTo.AttachedObj != null)
         {
             attachTo = attachTo.AttachedObj;
         }
+
+        _isAttached = true;
         _parentObj = attachTo;
         _lineRenderer.positionCount = 2;
 
@@ -112,34 +134,6 @@ public class Chainable : MonoBehaviour
                 bf = 0.8f * parentSpringJoint.breakForce;
             }
             _springJoint.breakForce = bf;
-        }
-    }
-
-    private async void OnJointBreak2D(Joint2D brokenJoint)
-    {
-        // Inform parent about breakage
-        if (_parentObj != null)
-        {
-            _parentObj.AttachedObj = null;
-        }
-        RoundManager.Instance.OnBoxBroken();
-
-        await Task.Delay(100);
-        Instantiate(explosionEffect, transform.position, transform.rotation);
-
-        if (AttachedObj != null)
-        {
-            AttachedObj.SendMessage("OnJointBreak2D", brokenJoint);
-        }
-        Destroy(gameObject);
-    }
-    
-    private void OnDestroy()
-    {
-        // Destroy any children
-        if (AttachedObj != null)
-        {
-            Destroy(AttachedObj.gameObject);
         }
     }
 }
