@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,12 +8,25 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Selectable))]
 public class HoverSelectable : MonoBehaviour, IPointerEnterHandler, IDeselectHandler
 {
+    private bool _wasSelected;
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null)
+        if (_wasSelected && EventSystem.current.currentSelectedGameObject == null)
         {
-            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            var thisSelectable = GetComponent<Selectable>();
+            var selectables = new List<Selectable>()
+            {
+                thisSelectable,
+                thisSelectable.FindSelectableOnDown(),
+                thisSelectable.FindSelectableOnUp(),
+                thisSelectable.FindSelectableOnRight(),
+                thisSelectable.FindSelectableOnLeft(),
+            };
+            Selectable next = selectables.Where(x => x != null && x.IsInteractable()).First();
+            EventSystem.current.SetSelectedGameObject(next?.gameObject);
         }
+
+        _wasSelected = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -24,5 +39,6 @@ public class HoverSelectable : MonoBehaviour, IPointerEnterHandler, IDeselectHan
     public void OnDeselect(BaseEventData eventData)
     {
         GetComponent<Selectable>().OnPointerExit(null);
+        _wasSelected = true;
     }
 }
